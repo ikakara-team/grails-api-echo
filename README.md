@@ -4,8 +4,6 @@ Description:
 --------------
 Grails plugin, used to help debug REST APIs.
 
-Apache 2 License - http://www.apache.org/licenses/LICENSE-2.0
-
 Installation:
 --------------
 ```
@@ -16,6 +14,18 @@ Installation:
   }
 ```
 
-Versions:
+Usage:
+--------------
+{{HTTP_METHOD}} {{YOUR_URL}}/echo/{{API_TO_ECHO}}
+
+Copyright & License:
+--------------
+Copyright 2014 Allen Arakaki.  All Rights Reserved.
+
+```
+Apache 2 License - http://www.apache.org/licenses/LICENSE-2.0
+```
+
+History:
 --------------
 0.1 - initial checkin

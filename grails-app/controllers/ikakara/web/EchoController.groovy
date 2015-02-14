@@ -20,26 +20,39 @@ import org.apache.commons.io.IOUtils
 class EchoController {
   private static final Set PARAMS_FILTER = ['action', 'controller', 'path']
 
+  def broken() {
+    def body
+    // parseRequest: false is broken - we'll have to get the POST data from params
+    try {
+      // this is broken; for some unknown reason this always fails
+      body = request.reader.text // read the content body
+      log.info "parseRequest: false - WORKING WORKING WORKING WORKING WORKING!"
+    } catch(e) {
+      // this will be
+      log.error "parseRequest: false - $e.message"
+    }
+    
+    render body
+  }
+
   def index() {
     log.debug "echo ${request.contextPath} servlet: ${request.servletPath} path: ${request.pathInfo} params: ${params}"
 
     def map = new TreeMap()
     request.headerNames.each { String name -> map[name] = request.getHeader(name) }
 
-    // parseRequest: false is broken - we'll have to get the POST data in params
-    try {
-      // this is broken
-      def body = request.reader.text // read the content body
+    // request.inputStream doesn't behave the same as request.reader.text
+    def enc = request.characterEncoding ?: "UTF-8"
+    def body
+
+    try { // request.inputStream will throw an exception if already been read
+      body = IOUtils.toString(request.inputStream, enc)
       log.info "parseRequest: false - WORKING WORKING WORKING WORKING WORKING!"
-    } catch(e) {
-      // this will be
+    } catch (e) {
       log.error "parseRequest: false - $e.message"
     }
 
-    // this doesn't behave the same as request.getReader().text
-    def enc = request.characterEncoding ?: "UTF-8"
-    def body = IOUtils.toString(request.inputStream, enc)
-    if (!body) {
+    if (!body) { // process body from params
       Set setQuery = []
       request.queryString?.split('&')?.each {
         def param = it.split('=')

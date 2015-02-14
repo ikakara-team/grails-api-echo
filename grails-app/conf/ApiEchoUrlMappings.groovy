@@ -2,16 +2,10 @@ class ApiEchoUrlMappings {
 
   static mappings = {
     // handles all paths
-    "/echo/$path**"(controller:"echo", action:"index", parseRequest: false) {
-      constraints {
-        // apply constraints here
-      }
+    "/echo/$path**"(controller:"echo", parseRequest: false) {
     }
     // handles no path
-    "/echo/"(controller:"echo", action:"index", parseRequest: false) {
-      constraints {
-        // apply constraints here
-      }
+    "/echo/"(controller:"echo", parseRequest: false) {
     }
   }
 }

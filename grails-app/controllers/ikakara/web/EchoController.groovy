@@ -16,40 +16,32 @@
 package ikakara.web
 
 import org.apache.commons.io.IOUtils
-import grails.converters.*
 
 class EchoController {
-  private static final HashSet PARAMS_FILTER = ['action', 'controller', 'path']
+  private static final Set PARAMS_FILTER = ['action', 'controller', 'path']
 
   def index() {
-    println "echo ${request.contextPath} servlet: ${request.servletPath} path: ${request.pathInfo} params: ${params}"
+    log.debug "echo ${request.contextPath} servlet: ${request.servletPath} path: ${request.pathInfo} params: ${params}"
 
-    def map = new TreeMap();
-    def enames = request.getHeaderNames();
-    while (enames.hasMoreElements()) {
-      String name = (String) enames.nextElement();
-      String value = request.getHeader(name);
-      map.put(name, value);
-    }
+    def map = new TreeMap()
+    request.headerNames.each { String name -> map[name] = request.getHeader(name) }
 
     // parseRequest: false is broken - we'll have to get the POST data in params
     try {
       // this is broken
-      def body = request.getReader().text // read the content body
+      def body = request.reader.text // read the content body
       log.info "parseRequest: false - WORKING WORKING WORKING WORKING WORKING!"
     } catch(e) {
       // this will be
-      log.error "parseRequest: false - " + e.getMessage()
+      log.error "parseRequest: false - $e.message"
     }
 
     // this doesn't behave the same as request.getReader().text
     def enc = request.characterEncoding ?: "UTF-8"
-    def is = request.getInputStream()
-    def body = IOUtils.toString(is, enc)
-    if(!body) {
-      HashSet setQuery = []
-      def queryParams = request.queryString?.split('&')
-      queryParams?.each {
+    def body = IOUtils.toString(request.inputStream, enc)
+    if (!body) {
+      Set setQuery = []
+      request.queryString?.split('&')?.each {
         def param = it.split('=')
         if(param?.length > 0) {
           setQuery.add(param[0])
@@ -57,13 +49,13 @@ class EchoController {
       }
 
       body = [:]
-      params.each {
-        if(PARAMS_FILTER.contains(it.key)) {
+      params.each { key, value ->
+        if(PARAMS_FILTER.contains(key)) {
           // ignore
-        } else if(setQuery.contains(it.key)) {
+        } else if(setQuery.contains(key)) {
           // ignore the queryString params
         } else {
-          body.put(it.key, it.value)
+          body[key] = value
         }
       }
     }
@@ -93,7 +85,5 @@ class EchoController {
         content: body
       ]
     }
-
   }
-
 }

@@ -1,8 +1,10 @@
-/extra/**
-/target/**
+.DS_Store
+*.log
 /.classpath
 /.project
-/*.zip
-/*.sha1
-/*.xml
-
+/extra
+/grails-api-echo-*.zip
+/grails-api-echo-*.zip.sha1
+/plugin.xml
+/target
+/web-app

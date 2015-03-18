@@ -1,4 +1,6 @@
 grails.project.work.dir = 'target'
+grails.project.target.level = 1.7
+grails.project.source.level = 1.7
 
 grails.project.dependency.resolver = 'maven'
 grails.project.dependency.resolution = {
@@ -18,7 +20,7 @@ grails.project.dependency.resolution = {
       export = false
     }
 
-    build(":release:3.0.1", ":rest-client-builder:2.0.3") {
+    build(":release:3.1.0", ":rest-client-builder:2.0.3") {
       export = false
     }
   }

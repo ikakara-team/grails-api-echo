@@ -9,7 +9,7 @@ Installation:
 ```
   plugins {
 ...
-    compile ':api-echo:0.1'
+    compile ':api-echo:0.2'
 ...
   }
 ```
@@ -28,4 +28,5 @@ Apache 2 License - http://www.apache.org/licenses/LICENSE-2.0
 
 History:
 --------------
+0.2 - grails 2.5.0
 0.1 - initial checkin

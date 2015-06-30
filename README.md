@@ -9,7 +9,7 @@ Installation:
 ```
   plugins {
 ...
-    compile ':api-echo:0.2'
+    compile ':api-echo:0.3'
 ...
   }
 ```
@@ -20,7 +20,7 @@ Usage:
 
 Copyright & License:
 --------------
-Copyright 2014-2015 Allen Arakaki.  All Rights Reserved.
+Copyright 2014-2015 the original author or authors.
 
 ```
 Apache 2 License - http://www.apache.org/licenses/LICENSE-2.0
@@ -29,6 +29,7 @@ Apache 2 License - http://www.apache.org/licenses/LICENSE-2.0
 History:
 --------------
 ```
+0.3 - update copyright
 0.2 - grails 2.5.0
 0.1 - initial checkin
 ```

@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Allen Arakaki. All Rights Reserved.
+ * Copyright 2014-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ikakara.web
+package ikakara.echo.web
 
 import org.apache.commons.io.IOUtils
 
